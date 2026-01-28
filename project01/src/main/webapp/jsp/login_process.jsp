@@ -14,14 +14,14 @@
 	String username = request.getParameter("username");
 	String password = request.getParameter("password");
 
-	boolean isValid = mdao.checkLogin(username, password);
+/* 	boolean isValid = mdao.checkLogin(username, password);
 
 	if (isValid) {
 		session.setAttribute("username", username);
 		response.sendRedirect("main.jsp");
 	} else {
 		response.sendRedirect("login.jsp?error=1");
-	}
+	} */
 	%>
 
 
