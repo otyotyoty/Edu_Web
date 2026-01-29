@@ -1,94 +1,89 @@
 package model;
 
-public class kanjiDTO {
-
-	private String kanji; // 한자 (글자)
-	private int level; // 한자 레벨
-
-	private String unyomi1; // 음독 1
-	private String unyomi2; // 음독 2
-	private String unyomi3; // 음독 3
-	private String unyomi4; // 음독 4
-
-	private String kunyomi1; // 훈독 1
-	private String kunyomi2; // 훈독 2
-	private String kunyomi3; // 훈독 3
-	private String kunyomi4; // 훈독 4
-
-	private String explanation; // 한자 설명
-	private String exampleWord; // 예시 단어
-	
-	public String getKanji() {
-		return kanji;
-	}
-	public void setKanji(String kanji) {
-		this.kanji = kanji;
-	}
-	public int getLevel() {
-		return level;
-	}
-	public void setLevel(int level) {
-		this.level = level;
-	}
-	public String getUnyomi1() {
-		return unyomi1;
-	}
-	public void setUnyomi1(String unyomi1) {
-		this.unyomi1 = unyomi1;
-	}
-	public String getUnyomi2() {
-		return unyomi2;
-	}
-	public void setUnyomi2(String unyomi2) {
-		this.unyomi2 = unyomi2;
-	}
-	public String getUnyomi3() {
-		return unyomi3;
-	}
-	public void setUnyomi3(String unyomi3) {
-		this.unyomi3 = unyomi3;
-	}
-	public String getUnyomi4() {
-		return unyomi4;
-	}
-	public void setUnyomi4(String unyomi4) {
-		this.unyomi4 = unyomi4;
-	}
-	public String getKunyomi1() {
-		return kunyomi1;
-	}
-	public void setKunyomi1(String kunyomi1) {
-		this.kunyomi1 = kunyomi1;
-	}
-	public String getKunyomi2() {
-		return kunyomi2;
-	}
-	public void setKunyomi2(String kunyomi2) {
-		this.kunyomi2 = kunyomi2;
-	}
-	public String getKunyomi3() {
-		return kunyomi3;
-	}
-	public void setKunyomi3(String kunyomi3) {
-		this.kunyomi3 = kunyomi3;
-	}
-	public String getKunyomi4() {
-		return kunyomi4;
-	}
-	public void setKunyomi4(String kunyomi4) {
-		this.kunyomi4 = kunyomi4;
-	}
-	public String getExplanation() {
-		return explanation;
-	}
-	public void setExplanation(String explanation) {
-		this.explanation = explanation;
-	}
-	public String getExampleWord() {
-		return exampleWord;
-	}
-	public void setExampleWord(String exampleWord) {
-		this.exampleWord = exampleWord;
-	}
-
+public class KanjiDTO {
+    private String kanji;
+    private int level;
+    private String unyomi_1;
+    private String unyomi_2;
+    private String unyomi_3;
+    private String unyomi_4;
+    private String kunyomi_1;
+    private String kunyomi_2;
+    private String kunyomi_3;
+    private String kunyomi_4;
+    private String explantion;
+    private String korean;
+    private String example_word;
+    
+    public KanjiDTO(String kanji, int level, String unyomi_1, String unyomi_2, String unyomi_3, String unyomi_4,
+            String kunyomi_1, String kunyomi_2, String kunyomi_3, String kunyomi_4, String explantion, String korean,
+            String example_word) {
+        super();
+        this.kanji = kanji;
+        this.level = level;
+        this.unyomi_1 = unyomi_1;
+        this.unyomi_2 = unyomi_2;
+        this.unyomi_3 = unyomi_3;
+        this.unyomi_4 = unyomi_4;
+        this.kunyomi_1 = kunyomi_1;
+        this.kunyomi_2 = kunyomi_2;
+        this.kunyomi_3 = kunyomi_3;
+        this.kunyomi_4 = kunyomi_4;
+        this.explantion = explantion;
+        this.korean = korean;
+        this.example_word = example_word;
+    }
+    
+    // Getter 메서드들
+    public String getKanji() { return kanji; }
+    public int getLevel() { return level; }
+    public String getUnyomi_1() { return unyomi_1; }
+    public String getUnyomi_2() { return unyomi_2; }
+    public String getUnyomi_3() { return unyomi_3; }
+    public String getUnyomi_4() { return unyomi_4; }
+    public String getKunyomi_1() { return kunyomi_1; }
+    public String getKunyomi_2() { return kunyomi_2; }
+    public String getKunyomi_3() { return kunyomi_3; }
+    public String getKunyomi_4() { return kunyomi_4; }
+    public String getExplantion() { return explantion; }
+    public String getKorean() { return korean; }
+    public String getExample_word() { return example_word; }
+    
+    // 음독을 하나의 문자열로 합치기
+    public String getOnyomiCombined() {
+        StringBuilder sb = new StringBuilder();
+        if (unyomi_1 != null && !unyomi_1.isEmpty()) sb.append(unyomi_1);
+        if (unyomi_2 != null && !unyomi_2.isEmpty()) {
+            if (sb.length() > 0) sb.append("、");
+            sb.append(unyomi_2);
+        }
+        if (unyomi_3 != null && !unyomi_3.isEmpty()) {
+            if (sb.length() > 0) sb.append("、");
+            sb.append(unyomi_3);
+        }
+        if (unyomi_4 != null && !unyomi_4.isEmpty()) {
+            if (sb.length() > 0) sb.append("、");
+            sb.append(unyomi_4);
+        }
+        return sb.toString();
+    }
+    
+    // 훈독을 하나의 문자열로 합치기
+    public String getKunyomiCombined() {
+        StringBuilder sb = new StringBuilder();
+        if (kunyomi_1 != null && !kunyomi_1.isEmpty()) sb.append(kunyomi_1);
+        if (kunyomi_2 != null && !kunyomi_2.isEmpty()) {
+            if (sb.length() > 0) sb.append("、");
+            sb.append(kunyomi_2);
+        }
+        if (kunyomi_3 != null && !kunyomi_3.isEmpty()) {
+            if (sb.length() > 0) sb.append("、");
+            sb.append(kunyomi_3);
+        }
+        if (kunyomi_4 != null && !kunyomi_4.isEmpty()) {
+            if (sb.length() > 0) sb.append("、");
+            sb.append(kunyomi_4);
+        }
+        return sb.toString();
+    }
 }

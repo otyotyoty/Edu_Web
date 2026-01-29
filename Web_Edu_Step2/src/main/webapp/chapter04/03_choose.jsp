@@ -9,24 +9,23 @@
 </head>
 <body bgcolor="#FFFFcc">
 
-	<h3>&lt;c:choose&gt;</h3>
-	<form>
-		<select name="sel">
-			<option>--</option>
 <%-- 			
 
 <!-- EL 표현식 -->
-${param.id}
-${name}
-${addr.username}
+<!-- Scriptlet 표현식. 위와 동일 -->
 
-<!-- Scriptlet 표현식. 위 코드는 아래와 동일 -->
+${param.id}
 <%= request.getParameter("id") %>
+
+${name}
 <%= request.getAttribute("name") %>
+(application.setAttribute("name", 값) 처럼 어딘가 저장되어 있어야 함)
+
+${addr.username}
 <%= addr.getUsername() %>
 
 
-${sol} 이라고 쓰면 JSP가 자동으로 아래 순서로 찾는다. :
+${name} 이라고 쓰면 JSP가 자동으로 아래 순서로 찾는다 :
 pageScope
 requestScope
 sessionScope
@@ -34,6 +33,10 @@ applicationScope
 
  --%>
 
+	<h3>&lt;c:choose&gt;</h3>
+	<form>
+		<select name="sel">
+			<option>--</option>
 			<option ${param.sel == 'a'? 'selected':'' }>a</option>
 			<!-- 'a'를 선택했다면 ${param.sel} 값: "b" , selected 속성 추가 -->
 			<option ${param.sel == 'b'? 'selected':'' }>b</option>

@@ -1,6 +1,6 @@
 package model;
 
-public class kanjiMemberDTO {
+public class KanjiMemberDTO {
 
 	private String userID;        // 회원 아이디
     private String userPW1;        // 비밀번호
