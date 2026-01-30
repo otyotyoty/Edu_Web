@@ -2,18 +2,26 @@
 <%@ page import="model.StudyProgressDTO" %>
 <%
     String level = request.getParameter("level");
-    if (level == null) {
+    String groupStr = request.getParameter("group");
+    
+    if (level == null || groupStr == null) {
         response.sendRedirect("index.jsp");
         return;
     }
     
-    // 해당 레벨의 학습 진행 상태 초기화
+    int groupNumber = Integer.parseInt(groupStr);
+    
+    // 학습 진행 상태 업데이트
     StudyProgressDTO progress = (StudyProgressDTO) session.getAttribute("studyProgress_" + level);
     if (progress != null) {
-        progress.resetProgress();
+        progress.addCompletedGroup(groupNumber);
         session.setAttribute("studyProgress_" + level, progress);
     }
     
-    // 그룹 선택 페이지로 이동 (dailyCount.jsp가 아님!)
+    // 그룹 한자 세션 제거
+    session.removeAttribute("groupKanji_" + level);
+    session.removeAttribute("currentGroup_" + level);
+    
+    // 그룹 선택 화면으로 이동
     response.sendRedirect("groupSelect.jsp?level=" + level);
 %>

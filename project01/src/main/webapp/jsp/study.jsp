@@ -1,20 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
 <%@ page import="model.KanjiDTO" %>
-<%@ page import="model.StudyProgressDTO" %>
 <%
     String level = request.getParameter("level");
-    if (level == null || level.isEmpty()) {
+    String groupStr = request.getParameter("group");
+    
+    if (level == null || groupStr == null) {
         response.sendRedirect("index.jsp");
         return;
     }
     
-    // 세션에서 오늘의 한자 리스트 가져오기
+    int groupNumber = Integer.parseInt(groupStr);
+    
+    // 세션에서 그룹 한자 리스트 가져오기
     @SuppressWarnings("unchecked")
-    List<KanjiDTO> kanjiList = (List<KanjiDTO>) session.getAttribute("todayKanji_" + level);
+    List<KanjiDTO> kanjiList = (List<KanjiDTO>) session.getAttribute("groupKanji_" + level);
     
     if (kanjiList == null || kanjiList.isEmpty()) {
-        response.sendRedirect("dailyCount.jsp?level=" + level);
+        response.sendRedirect("groupSelect.jsp?level=" + level);
         return;
     }
     
@@ -56,7 +59,8 @@
 <body>
     <div class="container">
         <div class="header">
-            <a href="index.jsp" class="back-link">한자 설명보기</a>
+            <a href="groupSelect.jsp?level=<%= level %>" class="back-link">그룹 선택</a>
+            <div class="group-info">그룹 <%= String.format("%02d", groupNumber) %></div>
             <div class="progress">
                 <%= currentIndex + 1 %>/<%= kanjiList.size() %>
             </div>
@@ -99,30 +103,30 @@
         
         <div class="navigation">
             <button class="nav-button prev-button" 
-                    onclick="location.href='study.jsp?level=<%= level %>&index=<%= currentIndex - 1 %>'"
+                    onclick="location.href='study.jsp?level=<%= level %>&group=<%= groupNumber %>&index=<%= currentIndex - 1 %>'"
                     <%= currentIndex == 0 ? "disabled" : "" %>>
                 <span class="nav-arrow">◀</span>
             </button>
             
             <% if (isLastKanji) { %>
                 <button class="nav-button next-button" 
-                        onclick="location.href='study.jsp?level=<%= level %>&index=0'">
+                        onclick="location.href='study.jsp?level=<%= level %>&group=<%= groupNumber %>&index=0'">
                     <span class="nav-arrow">▶</span>
                 </button>
             <% } else { %>
                 <button class="nav-button next-button" 
-                        onclick="location.href='study.jsp?level=<%= level %>&index=<%= currentIndex + 1 %>'">
+                        onclick="location.href='study.jsp?level=<%= level %>&group=<%= groupNumber %>&index=<%= currentIndex + 1 %>'">
                     <span class="nav-arrow">▶</span>
                 </button>
             <% } %>
         </div>
         
         <div class="button-section">
-            <button class="action-button finish-button" onclick="location.href='finishStudy.jsp?level=<%= level %>'">
+            <button class="action-button finish-button" onclick="location.href='finishGroup.jsp?level=<%= level %>&group=<%= groupNumber %>'">
                 학습 완료
             </button>
-            <button class="action-button home-button" onclick="location.href='cancelStudy.jsp?level=<%= level %>'">
-                메인으로 돌아가기
+            <button class="action-button home-button" onclick="location.href='groupSelect.jsp?level=<%= level %>'">
+                그룹 선택으로
             </button>
         </div>
     </div>

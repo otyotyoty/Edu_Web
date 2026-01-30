@@ -1,41 +1,39 @@
-
+// src/model/StudyProgressDTO.java
 package model;
 
 import java.util.HashSet;
 import java.util.Set;
-//학습 진행 상태 관리 DTO
+
 public class StudyProgressDTO {
     private String level;
-    private int dailyCount;
-    private Set<String> learnedKanji;  // 학습한 한자들
+    private Set<Integer> completedGroups;  // 완료한 그룹 번호들
     
-    public StudyProgressDTO(String level, int dailyCount) {
+    public StudyProgressDTO(String level) {
         this.level = level;
-        this.dailyCount = dailyCount;
-        this.learnedKanji = new HashSet<>();
+        this.completedGroups = new HashSet<>();
     }
     
     public String getLevel() {
         return level;
     }
     
-    public int getDailyCount() {
-        return dailyCount;
+    public Set<Integer> getCompletedGroups() {
+        return completedGroups;
     }
     
-    public Set<String> getLearnedKanji() {
-        return learnedKanji;
+    public void addCompletedGroup(int groupNumber) {
+        completedGroups.add(groupNumber);
     }
     
-    public void addLearnedKanji(String kanji) {
-        learnedKanji.add(kanji);
-    }
-    
-    public boolean isLearned(String kanji) {
-        return learnedKanji.contains(kanji);
+    public boolean isGroupCompleted(int groupNumber) {
+        return completedGroups.contains(groupNumber);
     }
     
     public void resetProgress() {
-        learnedKanji.clear();
+        completedGroups.clear();
+    }
+    
+    public int getCompletedCount() {
+        return completedGroups.size();
     }
 }

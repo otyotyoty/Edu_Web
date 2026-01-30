@@ -14,19 +14,13 @@
         <div class="level-section">
             <h2>학습할 레벨을 선택하세요</h2>
             <div class="level-buttons">
-                <button class="level-button" onclick="selectLevel('N5')">N5</button>
-                <button class="level-button" onclick="selectLevel('N4')">N4</button>
-                <button class="level-button" onclick="selectLevel('N3')">N3</button>
-                <button class="level-button" onclick="selectLevel('N2')">N2</button>
-                <button class="level-button" onclick="selectLevel('N1')">N1</button>
+                <button class="level-button" onclick="location.href='groupSelect.jsp?level=N5'">N5</button>
+                <button class="level-button" onclick="location.href='groupSelect.jsp?level=N4'">N4</button>
+                <button class="level-button" onclick="location.href='groupSelect.jsp?level=N3'">N3</button>
+                <button class="level-button" onclick="location.href='groupSelect.jsp?level=N2'">N2</button>
+                <button class="level-button" onclick="location.href='groupSelect.jsp?level=N1'">N1</button>
             </div>
         </div>
     </div>
-    
-    <script>
-        function selectLevel(level) {
-            window.location.href = 'dailyCount.jsp?level=' + level;
-        }
-    </script>
 </body>
 </html>
