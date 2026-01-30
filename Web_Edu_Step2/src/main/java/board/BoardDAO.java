@@ -111,6 +111,17 @@ public class BoardDAO {
 		int re_level = 1;
 
 		try {
+			// 먼저 시퀀스 값을 가져와서 num과 ref에 동일하게 사용
+	        String seqSql = "select board_seq.nextval from dual";
+	        pstmt = con.prepareStatement(seqSql);
+	        rs = pstmt.executeQuery();
+	        
+	        int num = 0;
+	        if (rs.next()) {
+	            num = rs.getInt(1);
+	        }
+	        ref = num;  // ref를 num과 동일하게 설정 (최신글이 위로)
+	        
 			String sql = "insert into board values(board_seq.nextval,?,?,?,?,sysdate,?,?,?,0,?)";
 			pstmt = con.prepareStatement(sql);
 
@@ -134,4 +145,59 @@ public class BoardDAO {
 
 	}// insertBoard
 
+	
+	
+	//--------------------상세정보--------------------
+	// #4. getOneBoard(num)
+
+	public BoardDTO getOneBoard(int num) {
+	    
+		//
+	
+		
+	    getCon();
+	    BoardDTO bean=new BoardDTO();
+	    
+		try {
+			
+			String countsql="update board set readcount=readcount+1 where num=?";
+			pstmt = con.prepareStatement(countsql);
+			
+			pstmt.setInt(1, num);
+			pstmt.executeUpdate();
+			
+			String sql = "SELECT * FROM board where num=?";
+
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				// 오라클에서 데이터를 가져와서 DTO에 저장
+				bean.setNum(rs.getInt(1));
+				bean.setWriter(rs.getString(2));
+				bean.setEmail(rs.getString(3));
+				bean.setSubject(rs.getString(4));
+				bean.setPassword(rs.getString(5));
+				bean.setReg_date(rs.getDate(6).toString());
+				bean.setRef(rs.getInt(7));
+				bean.setRe_step(rs.getInt(8));
+				bean.setRe_level(rs.getInt(9));
+				bean.setReadcount(rs.getInt(10));
+				bean.setContent(rs.getString(11));
+			}
+			con.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	    
+	    return bean;
+	    
+	}//getOneBoard
+	
+	
+	
 }
