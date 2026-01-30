@@ -13,6 +13,9 @@
 	<hr />
 	<!-- java code: var msg="/free" -->
 	<c:set var="msg" value="free" />
+	<!-- pageContext.setAttribute("msg", "free");  기본 scope는 page scope -->
+	
+	
 	before msg: ${msg }
 	<br />
 	<c:remove var="msg" />
@@ -29,12 +32,13 @@
 	<hr />
 	
 	<h3>&lt;c:if&gt;</h3>
-	<c:set var="ifmsg" value="user1" />
-	ifMsg: ${msg }
+	<c:set var="ifMsg" value="user1" />
+	ifMsg: ${ifMsg}
 	<br />
-	<c:if test="${ ifMsg == user1 }" var="result">
-	result: ${result }
+	<c:if test="${ ifMsg == 'user1' }" var="result">
+	result: ${result}
 	</c:if>
+	
 	<p></p>
 	<c:set var="name" value="김경민" />
 	이름: ${name }
@@ -45,6 +49,8 @@
 	<br />
 	<p></p>
 	<hr />
+	
+	
 	<!-- c:choose 태그 -->
 	<h3>&lt;c:choose&gt;</h3>
 	<c:set var="age" value="24" />
