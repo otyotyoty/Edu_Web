@@ -65,13 +65,16 @@ public class BoardListCon extends HttpServlet {
 		String msg = (String) request.getAttribute("msg"); // 0
 		
 		//JSP저장:boardList.jsp에서 사용할 데이터를 저장(request);
-		request.setAttribute("number", number);
+		request.setAttribute("number", number); //1
 		request.setAttribute("count", count);
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("pageSize", pageSize);
 		request.setAttribute("msg", msg);
 		request.setAttribute("v", v); //전체 게시글
 		
+		//JSP로 포워딩
+		RequestDispatcher dis=request.getRequestDispatcher("BoardList.jsp");
+		dis.forward(request, response);
 		
 //		이름			의미				JSP에서 하는 역할
 //		number		글 번호 시작값		번호 컬럼 출력. 게시글 번호 = 전체 글 개수부터 1까지 감소. 항상 최신 글이 가장 큰 번호
@@ -82,10 +85,9 @@ public class BoardListCon extends HttpServlet {
 //		v			게시글 목록	글 		리스트 출력
 		
 		
-		//JSP로 포워딩
-		RequestDispatcher dis = request.getRequestDispatcher("boardList.jsp");
-		dis.forward(request, response);
-
+		
+		
+		
 	}
 
 }

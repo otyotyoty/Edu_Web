@@ -1,18 +1,18 @@
 package board;
 
 public class BoardDTO {
-
-	private int num;
-	private String writer;
-	private String email;
-	private String subject;
-	private String password;
+	
+	private int num; 
+	private String writer;    
+	private String email;      
+	private String subject;     
+	private String password;   
 	private String reg_date;
-	private int ref;
-	private int re_step;
-	private int re_level;
-	private int readcount;
-	private String content;
+	private int ref; //글번호-> 글번호를 참고해서 메인 글의 갯수
+	private int re_step; //댓글의 번호를 추출하기 위한 글순서
+	private int re_level; //최신 댓글을 추출하기 위한 글순서
+	private int readcount; // 조회수
+	private String content; //내용
 	
 	public int getNum() {
 		return num;
@@ -80,8 +80,5 @@ public class BoardDTO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	
-	
-	
-	
+
 }

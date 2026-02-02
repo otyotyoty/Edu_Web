@@ -9,48 +9,46 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class BoardWriteProcCon
- */
+
 @WebServlet("/BoardWriteProcCon.do")
 public class BoardWriteProcCon extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		reqPro(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		reqPro(request, response);
 	}
-
-	protected void reqPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+	protected void reqPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		
 		request.setCharacterEncoding("utf-8");
 		
-		//---------------JSP(Front)---------------
-		
-		String writer=request.getParameter("writer");
+		//-------------JSP(Front)---------------
+		//String writer=request.getParameter("writer");
 		String subject=request.getParameter("subject");
 		String email=request.getParameter("email");
 		String password=request.getParameter("password");
 		String content=request.getParameter("content");
 		
 		BoardDTO bean=new BoardDTO();
-		//---------------JAVA(Back)---------------
-		bean.setWriter(writer);
+		//------------JAVA(Back)----------------
+		bean.setWriter(request.getParameter("writer"));
 		bean.setSubject(subject);
 		bean.setEmail(email);
 		bean.setPassword(password);
 		bean.setContent(content);
 		
-		//---------------Model(Database)---------------
+		//------------Modle(Database)-------------------
 		BoardDAO bdao=new BoardDAO();
 		bdao.insertBoard(bean);
 		
-		//글번호 처리("BoardListCon.do")
-		RequestDispatcher dis = request.getRequestDispatcher("BoardListCon.do");
-		dis.forward(request, response); // 정보 다가져감
+		//글쓰기 완료 후 글번호 처리 ("BoardListCon.do")로 이동
+		response.sendRedirect("BoardListCon.do");
+		
 		
 	}
+
 }

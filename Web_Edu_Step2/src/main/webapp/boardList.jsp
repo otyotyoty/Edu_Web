@@ -11,10 +11,13 @@
 	rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="./css/board.css">
 <script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
+	
+</script>
 <title>BBS List</title>
 </head>
 <body>
+
 	<c:if test="${msg==0}">
 		<script type="text/javascript">
 			alert("수정시 비밀번호가 일치하지 않습니다.");
@@ -48,34 +51,28 @@
 						<th width="150">조회</th>
 					</tr>
 				</thead>
-				<!--  ---------------------------------------- -->
+				<!-- 	--------------------------------------- -->
 				<tbody>
+
 					<c:set var="number" value="${number}" />
-					<!-- requestScope.number 값을 pageScope.number 로 복사. 이후 JSP 안에서 마음껏 감소시켜도 request 값은 건드리지 않음 -->
-					<!-- 원본(number in request) → 복사본, 복사본(number in page) → 하나씩 줄이면서 사용 -->
-					
-					
-					<!-- inhanced for문 -->
 					<c:forEach var="bean" items="${v}">
 						<tr height="40">
 							<td width="50" align="left">${number}</td>
 							<td width="300" align="left">
-								<c:if test="${bean.re_level > 0}">
-									<!-- re_level 값에 따라 padding-left 조정 적용 -->
-									<span style="padding-left: ${bean.re_level * 20}px;"></span>
-								</c:if>
-							<a href="BoardInfoControl.do?num=${bean.num}" style='text-decoration: none'> ${bean.subject}</a></td>
-
+							<c:if test="${bean.re_step > 1}">
+								<!-- re_step 값으로 들여쓰기 계산 -->
+								<span style="padding-left: ${(bean.re_step - 1) * 25}px;">↳ </span>
+							</c:if> 
+								<a href="BoardInfoControl.do?num=${bean.num}" style='text-decoration: none'> ${bean.subject}</a></td>
 							<td width="100" align="center">${bean.writer}</td>
 							<td width="150" align="center">${bean.reg_date}</td>
 							<td width="80" align="center">${bean.readcount}</td>
 						</tr>
-						<c:set var="number" value="${number-1}" />
+						<c:set var="number" value="${number-1 }" />
 					</c:forEach>
 				</tbody>
 			</table>
 		</div>
-
 		<p />
 		<c:if test="${count>0 }">
 			<!--  전체글 10개 10/10=1 =>1페이지
@@ -118,7 +115,5 @@
 		</c:if>
 
 	</center>
-
-
 </body>
 </html>
