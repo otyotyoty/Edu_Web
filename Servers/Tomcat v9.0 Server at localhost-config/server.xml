@@ -162,7 +162,7 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-      <Context docBase="Web_Edu_Step1" path="/Web_Edu_Step1" reloadable="true" source="org.eclipse.jst.jee.server:Web_Edu_Step1"/><Context docBase="project01" path="/project01" reloadable="true" source="org.eclipse.jst.jee.server:project01"/><Context docBase="Web_Edu_Step2" path="/Web_Edu_Step2" reloadable="true" source="org.eclipse.jst.jee.server:Web_Edu_Step2"/><Context docBase="API_CRAWLER" path="/API_CRAWLER" reloadable="true" source="org.eclipse.jst.jee.server:API_CRAWLER"/></Host>
+      <Context docBase="Web_Edu_Step1" path="/Web_Edu_Step1" reloadable="true" source="org.eclipse.jst.jee.server:Web_Edu_Step1"/><Context docBase="Web_Edu_Step2" path="/Web_Edu_Step2" reloadable="true" source="org.eclipse.jst.jee.server:Web_Edu_Step2"/><Context docBase="API_CRAWLER" path="/API_CRAWLER" reloadable="true" source="org.eclipse.jst.jee.server:API_CRAWLER"/><Context docBase="TeamTsumiki_Project_01" path="/TeamTsumiki_Project_01" reloadable="true" source="org.eclipse.jst.jee.server:TeamTsumiki_Project_01"/></Host>
     </Engine>
   </Service>
 </Server>
